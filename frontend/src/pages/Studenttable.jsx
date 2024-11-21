@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import * as XLSX from 'xlsx'; // Import xlsx library
-import '../App.css'; // Import the CSS file
+import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx"; // Import xlsx library
+import "../App.css"; // Import the CSS file
 
 const Studenttable = ({ subject }) => {
   const [students, setStudents] = useState([]);
@@ -9,21 +9,21 @@ const Studenttable = ({ subject }) => {
     if (!subject || !subject.students) return; // Guard clause for undefined props
 
     const studentIdsArray = subject.students; // Extract the `students` array
-    fetch('https://backend-1jle.vercel.app/api/admin/substudents', { 
-      method: 'POST',
+    fetch("https://backend-mgrr.vercel.app//api/admin/substudents", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json', // Add Content-Type header
+        "Content-Type": "application/json", // Add Content-Type header
       },
       body: JSON.stringify({ studentIds: studentIdsArray }), // Send the array to the backend
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => setStudents(data)) // Set the fetched students in state
-      .catch((error) => console.error('Error fetching students:', error));
+      .catch((error) => console.error("Error fetching students:", error));
   }, [subject]); // Re-run whenever the `subject` prop changes
 
   const exportToExcel = () => {
@@ -31,27 +31,29 @@ const Studenttable = ({ subject }) => {
     const worksheet = XLSX.utils.json_to_sheet(students);
     // Create a new workbook and append the worksheet
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Students');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Students");
     // Generate Excel file and trigger download
-    XLSX.writeFile(workbook, `${subject?.name || 'Subject'}_Students.xlsx`);
+    XLSX.writeFile(workbook, `${subject?.name || "Subject"}_Students.xlsx`);
   };
 
   return (
     <div>
-      <h1>Students for {subject?.name || 'Unknown Subject'}  {subject.code}</h1>
+      <h1>
+        Students for {subject?.name || "Unknown Subject"} {subject.code}
+      </h1>
       {students.length > 0 ? (
         <>
-          <button 
-            onClick={exportToExcel} 
+          <button
+            onClick={exportToExcel}
             style={{
-              backgroundColor: '#4CAF50', // Green color
-              color: 'white', // White text
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginBottom: '10px',
-              fontSize: '16px',
+              backgroundColor: "#4CAF50", // Green color
+              color: "white", // White text
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              cursor: "pointer",
+              marginBottom: "10px",
+              fontSize: "16px",
             }}
           >
             Export to Excel

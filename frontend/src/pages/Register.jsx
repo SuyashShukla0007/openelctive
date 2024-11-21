@@ -50,7 +50,7 @@ export default function Register() {
 
     try {
       const response = await axios.post(
-        "https://backend-1jle.vercel.app/api/student/register",
+        "https://backend-mgrr.vercel.app//api/student/register",
         { rollNumber }
       );
       setFormData((prev) => ({
@@ -98,10 +98,13 @@ export default function Register() {
     }
 
     try {
-      await axios.post("https://backend-1jle.vercel.app/api/student/register", {
-        rollNumber: formData.rollNumber,
-        password: formData.password,
-      });
+      await axios.post(
+        "https://backend-mgrr.vercel.app//api/student/register",
+        {
+          rollNumber: formData.rollNumber,
+          password: formData.password,
+        }
+      );
       alert("Password updated successfully!");
       navigate("/login");
     } catch {
@@ -113,7 +116,9 @@ export default function Register() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px" }}>
-      <h1 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}>
+      <h1
+        style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}
+      >
         Update Password
       </h1>
 
@@ -227,7 +232,9 @@ export default function Register() {
         {isStudentFound && (
           <button
             type="submit"
-            disabled={!formData.password || !formData.confirmPassword || isLoading}
+            disabled={
+              !formData.password || !formData.confirmPassword || isLoading
+            }
             style={{
               width: "100%",
               padding: "10px",

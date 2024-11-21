@@ -12,9 +12,12 @@ function StudentDashboard() {
     const fetchStudentDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://backend-1jle.vercel.app/api/student/details", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://backend-mgrr.vercel.app//api/student/details",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setStudent(response.data.student);
       } catch (err) {
         setError("Failed to load student details.");
@@ -37,7 +40,9 @@ function StudentDashboard() {
             alt="NIT Kurukshetra Logo"
             className="h-12 w-12"
           />
-          <h1 className="text-xl font-semibold">NIT Kurukshetra - Student Dashboard</h1>
+          <h1 className="text-xl font-semibold">
+            NIT Kurukshetra - Student Dashboard
+          </h1>
         </div>
       </header>
 
@@ -55,7 +60,9 @@ function StudentDashboard() {
           <div className="space-y-6 w-[40vw] mx-auto">
             {/* Student Details */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Student Information</h2>
+              <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">
+                Student Information
+              </h2>
               <ul className="space-y-3">
                 <li className="flex justify-between">
                   <span className="font-medium">Roll Number:</span>
@@ -78,7 +85,9 @@ function StudentDashboard() {
 
             {/* Subjects */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Subjects Allotted</h2>
+              <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">
+                Subjects Allotted
+              </h2>
               {student.subjects && student.subjects.length > 0 ? (
                 <ul className="space-y-3">
                   {student.subjects.map((subject) => (
@@ -86,8 +95,12 @@ function StudentDashboard() {
                       key={subject._id}
                       className="flex items-center justify-between bg-gray-50 p-3 rounded-md shadow"
                     >
-                      <span className="font-medium text-gray-700">{subject.name}</span>
-                      <span className="text-sm text-gray-500">(Code: {subject.code})</span>
+                      <span className="font-medium text-gray-700">
+                        {subject.name}
+                      </span>
+                      <span className="text-sm text-gray-500">
+                        (Code: {subject.code})
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -100,29 +113,30 @@ function StudentDashboard() {
 
             {/* Button for Electives */}
             <div className="text-center">
-              {student.subjects.length === 0 && student.choices && student.choices.length === 0 && (
-                <button
-                  onClick={() => navigate("/openelective")}
-                  className="mt-6 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
-                >
-                  Select Open Electives
-                </button>
-              )}
+              {student.subjects.length === 0 &&
+                student.choices &&
+                student.choices.length === 0 && (
+                  <button
+                    onClick={() => navigate("/openelective")}
+                    className="mt-6 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+                  >
+                    Select Open Electives
+                  </button>
+                )}
 
-              {student.subjects.length === 0 && student.choices && student.choices.length > 0 && (
-                <button
-                  onClick={() => navigate("/Updateelective")}
-                  className="mt-6 px-6 py-2 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 transition"
-                >
-                  Update Chosen Electives
-                </button>
-              )}
-              <button
-              
-                  className="mt-6 px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
-                >
-                 Check Syllabus
-                </button>
+              {student.subjects.length === 0 &&
+                student.choices &&
+                student.choices.length > 0 && (
+                  <button
+                    onClick={() => navigate("/Updateelective")}
+                    className="mt-6 px-6 py-2 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 transition"
+                  >
+                    Update Chosen Electives
+                  </button>
+                )}
+              <button className="mt-6 px-6 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition">
+                Check Syllabus
+              </button>
             </div>
           </div>
         )}

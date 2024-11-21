@@ -15,7 +15,7 @@ function AdminDashboard() {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "https://backend-1jle.vercel.app/api/admin/electives",
+        "https://backend-mgrr.vercel.app//api/admin/electives",
         {},
         {
           headers: {
@@ -39,7 +39,7 @@ function AdminDashboard() {
 
     try {
       const response = await axios.delete(
-        "https://backend-1jle.vercel.app/api/admin/electives"
+        "https://backend-mgrr.vercel.app//api/admin/electives"
       );
 
       setMessage(response.data.message);
@@ -105,9 +105,8 @@ function AdminDashboard() {
             onClick={handleNavigateToSubjectIcon}
             className="w-full px-6 py-3 text-lg bg-green-600 text-white rounded-lg font-semibold shadow-md hover:bg-green-700 transition"
           >
-           View Subject-wise Students
+            View Subject-wise Students
           </button>
-
         </div>
 
         {/* Message Section */}

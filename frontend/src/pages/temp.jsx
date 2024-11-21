@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    rollNumber: '',
-    name: '',
-    email: '',
-    password: '',
-    sem: '',
-    branch: '',
+    rollNumber: "",
+    name: "",
+    email: "",
+    password: "",
+    sem: "",
+    branch: "",
   });
   const [isStudentFound, setIsStudentFound] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    if (e.target.name === 'password') {
+    if (e.target.name === "password") {
       setPasswordStrength(calculateStrength(e.target.value));
     }
   };
@@ -39,21 +39,24 @@ export default function Register() {
 
   const handleFindStudent = async () => {
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const response = await axios.post('https://backend-1jle.vercel.app/api/student/register', {
-        rollNumber: formData.rollNumber,
-      });
+      const response = await axios.post(
+        "https://backend-mgrr.vercel.app//api/student/register",
+        {
+          rollNumber: formData.rollNumber,
+        }
+      );
       setFormData({
         ...formData,
         ...response.data, // Pre-fill name, email, sem, branch
-        password: '', // Keep password empty for security
+        password: "", // Keep password empty for security
       });
 
       setIsStudentFound(true);
     } catch (error) {
-      setError('Student not found. Please check the roll number.');
+      setError("Student not found. Please check the roll number.");
       setIsStudentFound(false);
     } finally {
       setIsLoading(false);
@@ -63,18 +66,21 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      await axios.post('https://backend-1jle.vercel.app/api/student/register', {
-        rollNumber: formData.rollNumber,
-        email: formData.email,
-        password: formData.password,
-      });
-      alert('Email and password updated successfully!');
-      navigate('/login');
+      await axios.post(
+        "https://backend-mgrr.vercel.app//api/student/register",
+        {
+          rollNumber: formData.rollNumber,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+      alert("Email and password updated successfully!");
+      navigate("/login");
     } catch (error) {
-      setError('Failed to update email or password. Please try again.');
+      setError("Failed to update email or password. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -84,23 +90,25 @@ export default function Register() {
   const getStrengthLabel = () => {
     switch (passwordStrength) {
       case 0:
-        return 'Very Weak';
+        return "Very Weak";
       case 1:
-        return 'Weak';
+        return "Weak";
       case 2:
-        return 'Medium';
+        return "Medium";
       case 3:
-        return 'Strong';
+        return "Strong";
       case 4:
-        return 'Very Strong';
+        return "Very Strong";
       default:
-        return '';
+        return "";
     }
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
-      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
+    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px" }}>
+      <h1
+        style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}
+      >
         Student Email & Password Update
       </h1>
 
@@ -113,11 +121,11 @@ export default function Register() {
           onChange={handleChange}
           required
           style={{
-            width: '100%',
-            padding: '8px',
-            marginBottom: '10px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
+            width: "100%",
+            padding: "8px",
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
           }}
         />
         <button
@@ -125,17 +133,17 @@ export default function Register() {
           onClick={handleFindStudent}
           disabled={isLoading || !formData.rollNumber}
           style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            marginBottom: '10px',
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            marginBottom: "10px",
           }}
         >
-          {isLoading ? 'Finding Student...' : 'Find Student'}
+          {isLoading ? "Finding Student..." : "Find Student"}
         </button>
 
         {isStudentFound && (
@@ -147,12 +155,12 @@ export default function Register() {
               value={formData.name}
               disabled
               style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                backgroundColor: '#f0f0f0',
+                width: "100%",
+                padding: "8px",
+                marginBottom: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                backgroundColor: "#f0f0f0",
               }}
             />
             <input
@@ -162,12 +170,12 @@ export default function Register() {
               value={formData.sem}
               disabled
               style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                backgroundColor: '#f0f0f0',
+                width: "100%",
+                padding: "8px",
+                marginBottom: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                backgroundColor: "#f0f0f0",
               }}
             />
             <input
@@ -177,12 +185,12 @@ export default function Register() {
               value={formData.branch}
               disabled
               style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                backgroundColor: '#f0f0f0',
+                width: "100%",
+                padding: "8px",
+                marginBottom: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                backgroundColor: "#f0f0f0",
               }}
             />
             <input
@@ -193,11 +201,11 @@ export default function Register() {
               onChange={handleChange}
               required
               style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
+                width: "100%",
+                padding: "8px",
+                marginBottom: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
               }}
             />
             <input
@@ -208,55 +216,55 @@ export default function Register() {
               onChange={handleChange}
               required
               style={{
-                width: '100%',
-                padding: '8px',
-                marginBottom: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
+                width: "100%",
+                padding: "8px",
+                marginBottom: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
               }}
             />
             {/* Password Strength Bar */}
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: "10px" }}>
               <div
                 style={{
-                  height: '10px',
-                  width: '100%',
-                  backgroundColor: '#e0e0e0',
-                  borderRadius: '5px',
+                  height: "10px",
+                  width: "100%",
+                  backgroundColor: "#e0e0e0",
+                  borderRadius: "5px",
                 }}
               >
                 <div
                   style={{
-                    height: '100%',
+                    height: "100%",
                     width: `${(passwordStrength / 4) * 100}%`,
                     backgroundColor:
                       passwordStrength === 4
-                        ? '#4CAF50'
+                        ? "#4CAF50"
                         : passwordStrength === 3
-                        ? '#8BC34A'
+                        ? "#8BC34A"
                         : passwordStrength === 2
-                        ? '#FFEB3B'
+                        ? "#FFEB3B"
                         : passwordStrength === 1
-                        ? '#FF9800'
-                        : '#F44336',
-                    borderRadius: '5px',
+                        ? "#FF9800"
+                        : "#F44336",
+                    borderRadius: "5px",
                   }}
                 />
               </div>
               <div
                 style={{
-                  textAlign: 'right',
-                  fontSize: '12px',
+                  textAlign: "right",
+                  fontSize: "12px",
                   color:
                     passwordStrength === 4
-                      ? '#4CAF50'
+                      ? "#4CAF50"
                       : passwordStrength === 3
-                      ? '#8BC34A'
+                      ? "#8BC34A"
                       : passwordStrength === 2
-                      ? '#FFEB3B'
+                      ? "#FFEB3B"
                       : passwordStrength === 1
-                      ? '#FF9800'
-                      : '#F44336',
+                      ? "#FF9800"
+                      : "#F44336",
                 }}
               >
                 {getStrengthLabel()}
@@ -268,11 +276,11 @@ export default function Register() {
         {error && (
           <div
             style={{
-              backgroundColor: '#ffebee',
-              color: '#c62828',
-              padding: '10px',
-              borderRadius: '4px',
-              marginBottom: '10px',
+              backgroundColor: "#ffebee",
+              color: "#c62828",
+              padding: "10px",
+              borderRadius: "4px",
+              marginBottom: "10px",
             }}
           >
             {error}
@@ -284,25 +292,25 @@ export default function Register() {
             type="submit"
             disabled={isLoading || !formData.email || !formData.password}
             style={{
-              width: '100%',
-              padding: '10px',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              marginBottom: '10px',
+              width: "100%",
+              padding: "10px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              marginBottom: "10px",
             }}
           >
-            {isLoading ? 'Updating...' : 'Update Email & Password'}
+            {isLoading ? "Updating..." : "Update Email & Password"}
           </button>
         )}
       </form>
 
-      <div style={{ textAlign: 'center', marginTop: '10px' }}>
-        <p style={{ fontSize: '14px' }}>
-          Already registered?{' '}
-          <Link to="/login" style={{ color: '#007bff' }}>
+      <div style={{ textAlign: "center", marginTop: "10px" }}>
+        <p style={{ fontSize: "14px" }}>
+          Already registered?{" "}
+          <Link to="/login" style={{ color: "#007bff" }}>
             Login
           </Link>
         </p>

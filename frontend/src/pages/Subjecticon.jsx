@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import '../App.css';
-import Studenttable from './Studenttable'; // Import the new component
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "../App.css";
+import Studenttable from "./Studenttable"; // Import the new component
 
 function Subjecticon() {
   const [subjects, setSubjects] = useState([]);
@@ -10,12 +10,12 @@ function Subjecticon() {
   useEffect(() => {
     // Fetch subjects from the backend API
     axios
-      .get('https://backend-1jle.vercel.app/api/subjects')
+      .get("https://backend-mgrr.vercel.app//api/subjects")
       .then((response) => {
         setSubjects(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching subjects:', error);
+        console.error("Error fetching subjects:", error);
       });
   }, []);
 
@@ -55,15 +55,20 @@ function Subjecticon() {
             >
               Back
             </button>
-            <Studenttable subject={activeSubject} /> {/* Pass the active subject here */}
+            <Studenttable subject={activeSubject} />{" "}
+            {/* Pass the active subject here */}
           </div>
         ) : (
           <div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">Subjects by Semester</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">
+              Subjects by Semester
+            </h1>
 
             {/* 6th Semester Section */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-700 mb-4">6th Semester</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-4">
+                6th Semester
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {semester6Subjects.length > 0 ? (
                   semester6Subjects.map((subject) => (
@@ -72,18 +77,24 @@ function Subjecticon() {
                       className="bg-red-500 text-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition overflow-hidden text-center"
                       onClick={() => handleSubjectClick(subject)}
                     >
-                      <div className="font-semibold text-lg truncate">{subject.name}</div>
+                      <div className="font-semibold text-lg truncate">
+                        {subject.name}
+                      </div>
                     </div>
                   ))
                 ) : (
-                  <div className="text-center text-gray-500">No subjects for 6th semester.</div>
+                  <div className="text-center text-gray-500">
+                    No subjects for 6th semester.
+                  </div>
                 )}
               </div>
             </div>
 
             {/* 8th Semester Section */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-700 mb-4">8th Semester</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-4">
+                8th Semester
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {semester8Subjects.length > 0 ? (
                   semester8Subjects.map((subject) => (
@@ -92,11 +103,15 @@ function Subjecticon() {
                       className="bg-red-500 text-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition overflow-hidden text-center"
                       onClick={() => handleSubjectClick(subject)}
                     >
-                      <div className="font-semibold text-lg truncate">{subject.name}</div>
+                      <div className="font-semibold text-lg truncate">
+                        {subject.name}
+                      </div>
                     </div>
                   ))
                 ) : (
-                  <div className="text-center text-gray-500">No subjects for 8th semester.</div>
+                  <div className="text-center text-gray-500">
+                    No subjects for 8th semester.
+                  </div>
                 )}
               </div>
             </div>
